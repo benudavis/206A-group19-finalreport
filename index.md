@@ -1,7 +1,7 @@
 ---
 layout: home
-author_profile: true
+author_profile: false
 permalink: /
 ---
 
-{% include figure image_path="/assets/media/landing_gif.gif" caption="**Figure 1:** Demonstration of the Model Predictive Control (MPC) algorithm in action." %}
+{% include figure image_path="/assets/media/landing_gif.gif" width=70% %}
