@@ -8,4 +8,4 @@ Pick and place sorting is a common application of robotics in areas like e-comme
 
 {% include figure image_path="/assets/media/robot_sorting.png" width="50%" caption="Recycling is one promising application for robotic pick and place sorting." %}
 
-In this project, our end goal was to demonstrate a robot that can successfully pick objects out of a clutter, classify them, and guide them to their destinations with collision-free trajectories. To do so, we were required to develop and implement strategies for the two challenges mentioned above--extracting object classes and locations from RGB-D data, and planning collision-free trajectories for the robot during object placement.
+In this project, our end goal is to demonstrate a robot that can successfully pick objects out of a clutter, classify them, and guide them to their destinations with collision-free trajectories. To do so, we develop and implement strategies for the two challenges mentioned above--extracting object classes and locations from RGB-D data, and planning collision-free trajectories for the robot during object placement.
