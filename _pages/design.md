@@ -2,6 +2,7 @@
 title: "Design"
 permalink: /design/
 layout: single
+mathjax: true
 ---
 
 ## System Design and Task Goals
@@ -16,6 +17,10 @@ To accomplish this task, we design our system in two modules: perception and pla
 
 ## Design: Perception
 
-Our perception stack takes live RGB-D data, filters out irrelevant points, organizes the remaining points into clusters, and then uses color and size thresholding to classify individual objects and the obstacle. 
+Our perception stack takes live RGB-D data, filters out irrelevant points, organizes the remaining points into clusters, and then uses color and size thresholding to classify individual objects and the obstacle.
+
+To filter the raw depth image points \$P\$, we apply a series of two filters. The first filter removes points further than a certain distance away from the camera:
+
+\$ S = {(x_{cam},y_{cam},z_{cam}) \in P | z_{cam} < z_{thresh}>} \$
 
 ## Design: Planning and Control
