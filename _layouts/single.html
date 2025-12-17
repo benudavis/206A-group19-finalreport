@@ -84,4 +84,8 @@ layout: default
   {% elsif page.id and page.related %}
     {% include page__related.html posts=site.posts %}
   {% endif %}
+
+  {% if page.use_math %}
+    {% include mathjax-custom.html %}
+  {% endif %}
 </div>

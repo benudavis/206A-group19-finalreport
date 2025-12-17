@@ -2,7 +2,7 @@
 title: "Design"
 permalink: /design/
 layout: single
-mathjax: true
+use_math: true
 ---
 
 ## System Design and Task Goals
