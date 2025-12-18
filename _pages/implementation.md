@@ -19,6 +19,8 @@ The objects are published in a custom `CubeArray` message type, which contains a
 
 The `BoxBounds` and `CubeArray` messages are published in the local (camera) frame. We use another node, `transform_perception`, to transform the position information in these messages into the robot base frame. To prevent our planner from finding trajectories around the obstacle (as opposed to above it), we extend the transformed obstacle `BoxBounds` message by 0.5 m in the +/- y directions with respect to the robot base frame.
 
+{% include figure image_path="/assets/media/dbscan.gif" width="70%" caption="Published cube positions and obstacle bounding box (before y-axis extension) in RViz." %}
+
 ## Planning and Control
 
 
