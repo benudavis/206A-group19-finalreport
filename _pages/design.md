@@ -35,4 +35,11 @@ One major drawback of this approach is that we cannot handle objects in contact 
 
 ## Design: Planning and Control
 
-here, I think we should talk about MPC formulation: state vector, cost, constraints, etc
+The Model Prdictive Control (MPC) formulation for the project was designed to generate feasible joint-space trajectories for the 6-DoF UR7e robot arm with physical and environment constraints. By using a constrained finite-horizon optimaztion problem, it will the robot arm to navigate the objects to the target in a receding-horizon loop.
+
+### Prediction Model
+
+The robot's joint-space motion has been modeled using a discrete-time representation, where the state $x% is defined by joint positions $q \in \mathbb{R}^6$ and the control input $u$ is... TODO: Will edit after Parham finishes up in the lab
+
+$$x_{k+1} = x_k + u_k \Delta t$$
+
