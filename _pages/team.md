@@ -31,7 +31,7 @@ author_profile: false
     object-fit: cover;
     border-radius: 50%; /* Makes headshots circular */
     margin-bottom: 15px;
-    border: 3px solid #f2f3f3; /* Optional: light border */
+    /* border: 3px solid #f2f3f3;*/ /* Optional: light border */
   }
 
   .team-member h3 {
@@ -55,21 +55,21 @@ author_profile: false
   </div>
 
   <div class="team-member">
-    <img src="{{ '/assets/media/ben.JPEG' | relative_url }}" alt="Kathy Min">
+    <img src="{{ '/assets/media/ben.JPEG' | relative_url }}" alt="Ben Davis">
     <h3>Ben Davis</h3>
     <p>Ben is a Mechanical Engineering PhD student in the Embodied Dexterity Group under Prof. Hannah Stuart. His research interests are in mechanical design, sensing, and control for robotic manipulation.</p>
     <p> Ben worked with Kathy to implement the perception stack. He also worked with the team on system integration and debugging.</p>
   </div>
 
   <div class="team-member">
-    <img src="/assets/media/sharaf.jpg" alt="Sharaf Hossain">
+    <img src="{{ '/assets/media/sharaf.jpg' | relative_url }}" alt="Sharaf Hossain">
     <h3>Sharaf Hossain</h3>
     <p>Sharaf is a MEng Mechanical Engineering student, specializing in Robotics and Control. He is currently working with Dr. Allen Y. Yang for his Capstone Project on Autonomous Race Cars, where he is working on real-time MPC. Sharaf's research interests are in robotics control systems.</p>
     <p>Sharaf worked with Parham to implement the planning/control stack. He also worked with the team on system integration and debugging.</p>
   </div>
 
   <div class="team-member">
-    <img src="/assets/media/parham.jpg" alt="Parham Sharafoleslami">
+    <img src="{{ '/assets/media/parham.jpg' | relative_url }}" alt="Parham Sharafoleslami">
     <h3>Parham Sharafoleslami</h3>
     <p>Parham is an MEng Mechanical Engineering student specializing in Robotics and Autonomous Systems. He is currently working with Dr. Allen Y. Yang on the Autonomous Race Car project. His research interests includes offline MPC and control systems, with applications in robotics and automation.</p>
     <p>Parham worked with Sharaf to implement the planning/control stack. He also worked with the team on system integration and debugging.</p>
