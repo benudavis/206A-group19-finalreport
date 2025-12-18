@@ -26,3 +26,26 @@ feature_row:
 
 {% include feature_row %}
 
+<div class="grid__wrapper">
+  <div class="grid__item">
+    <article class="archive__item">
+      <div class="archive__item-teaser">
+        <img src="/assets/images/kathy.jpg" alt="Kathy Min" style="border-radius: 50%;">
+      </div>
+      <h3 class="archive__item-title">Kathy Min</h3>
+      <div class="archive__item-excerpt">Bio for Kathy goes here.</div>
+    </article>
+  </div>
+
+  <div class="grid__item">
+    <article class="archive__item">
+      <div class="archive__item-teaser">
+        <img src="/assets/images/ben.jpg" alt="Ben Davis" style="border-radius: 50%;">
+      </div>
+      <h3 class="archive__item-title">Ben Davis</h3>
+      <div class="archive__item-excerpt">Bio for Ben goes here.</div>
+    </article>
+  </div>
+
+  </div>
+
