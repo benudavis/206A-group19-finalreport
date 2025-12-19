@@ -39,11 +39,23 @@ One major drawback of this approach is that we cannot handle objects in contact 
 
 ## Design: Planning and Control
 
-The Model Prdictive Control (MPC) formulation for the project was designed to generate feasible joint-space trajectories for the 6-DoF UR7e robot arm with physical and environment constraints. By using a constrained finite-horizon optimaztion problem, it will the robot arm to navigate the objects to the target in a receding-horizon loop.
+To move the grasped cube around the obstacle, we use a joint-space nonlinear MPC (NMPC) that optimizes a short horizon, executes only the first three steps, and replans. The decision variables are joint positions $q_k$ and bounded joint steps $\Delta q_k$ with simple discrete-time dynamics over a 30-step horizon with $\Delta t = 0.1$ s. Each step is limited to $\pm 0.15$ rad to keep commanded motion smooth and physically feasible, and joint limits are enforced directly.
 
-### Prediction Model
+$$q_{k+1} = q_k + \Delta q_k$$
 
-The robot's joint-space motion has been modeled using a discrete-time representation, where the state $x% is defined by joint positions $q \in \mathbb{R}^6$ and the control input $u$ is... TODO: Will edit after Parham finishes up in the lab
 
-$$x_{k+1} = x_k + u_k \Delta t$$
+Collision avoidance is modeled by proxying the end effector plus grasped cube with three spheres placed along the tool ($[0,0,0]$, $[0,0,0.02]$, $[0,0,0.03]$ m) and radii of roughly 0.03–0.05 m after inflation. At every step, each sphere must clear the perceived obstacle AABB by at least its radius (hard constraint). Table clearance is handled with slack to avoid infeasibility when the table height estimate is tight, and the down-facing condition on the tool is applied only at the terminal waypoint (soft slack) so the arm can maneuver freely mid-trajectory but end with the gripper oriented downward at the drop pose.
 
+The cost penalizes end-effector position error, joint step magnitude, and terminal position error (with a terminal weight 10× larger). Orientation tracking along the path is disabled—only the terminal facing-down condition is enforced—so the solver prioritizes obstacle clearance and goal convergence. Obstacle geometry comes straight from perception as an AABB in the robot frame, so any change in the obstacle estimate is reflected immediately in the constraint set.
+
+Execution follows a receding-horizon loop: 
+
+(1) solve NMPC with the latest joint state and obstacle AABB 
+
+(2) execute the first three 0.15 s joint steps
+
+(3) replan until the end effector is within a 3 cm goal tolerance or a maximum iteration cap. 
+
+This closed-loop scheme was critical for robustness. Earlier open-loop plans would either violate the inflated obstacle bounds (when proxy radii were too large) or favor smoothness over goal seeking (when Q/R was unbalanced). Smaller proxy spheres and retuned weights, combined with frequent replanning, resolved those failures and kept the arm converging while respecting hard obstacle constraints.
+
+Key design trade-offs mirror the perception stack: hard AABB clearance for safety, softened table and terminal-facing constraints for feasibility, terminal-only orientation to reduce unnecessary path constraints, and short-horizon replanning to tolerate state drift and updated obstacle estimates.
