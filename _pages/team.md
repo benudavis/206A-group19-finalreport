@@ -62,7 +62,7 @@ author_profile: false
   </div>
 
   <div class="team-member">
-    <img src="{{ '/assets/media/sharaf.jpg' | relative_url }}" alt="Sharaf Hossain">
+    <img src="{{ '/assets/media/sharaf_headshot.jpeg' | relative_url }}" alt="Sharaf Hossain">
     <h3>Sharaf Hossain</h3>
     <p>Sharaf is a MEng Mechanical Engineering student, specializing in Robotics and Control. He is currently working with Dr. Allen Y. Yang for his Capstone Project on Autonomous Race Cars, where he is working on real-time MPC. Sharaf's research interests are in robotics control systems.</p>
     <p>Sharaf worked with Parham to implement the planning/control stack. He also worked with the team on system integration and debugging.</p>
