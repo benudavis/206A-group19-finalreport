@@ -23,7 +23,10 @@ The `BoxBounds` and `CubeArray` messages are published in the local (camera) fra
 
 ## Planning and Control
 
+Our controls stack lives in the ROS 2 planning package. The main node, `main_mpc_new.py`, subscribes to `JointState`, `LabeledCubeArray` (cube centroids + color), and `BoxBounds` (obstacle AABB) in `base_link`, with TF as a fallback if any message arrives in another frame. It assigns fixed drop locations based on color (e.g red vs. black), queues cubes, and toggles the gripper via a `Trigger` service.
 
-...
+The NMPC controller uses a 30-step horizon at $\Delta t = 0.1$ s with per-step joint limits of $\pm 0.15$ rad. The end effector with grasped cube is approximated by multiple inflated proxy spheres (radii ≈ 0.03–0.05 m) that must clear the perceived obstacle AABB at every step (hard constraint). Table clearance is enforced with slack, and a facing-down condition is enforced only at the terminal waypoint (soft slack). Costs emphasize end-effector position error and terminal accuracy (terminal weight multiplier = 10) with a lighter penalty on joint step magnitude; orientation tracking along the path is disabled.
 
-A launch file `warehouse_sorting_bringup.launch.py` deals with launching the helper nodes, and a `main.py` script implements the main loop logic.
+Execution follows a short-horizon closed loop: solve NMPC with the latest joint state and obstacle AABB, execute the first three 0.15 s joint steps from that solution via `FollowJointTrajectory`, then replan with the updated state. The loop stops when the goal is within 3 cm or a maximum iteration cap (40 solves) is hit. Early failures were traced to oversized proxy spheres (false collisions) and an imbalanced Q/R that favored smoothness over goal seeking; shrinking the spheres and retuning the weights restored feasibility and consistent convergence around the hard obstacle constraints.
+
+`warehouse_sorting_bringup.launch.py` starts the perception transformers and the planning node with these parameters.
