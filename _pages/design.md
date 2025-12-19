@@ -46,7 +46,7 @@ $$q_{k+1} = q_k + \Delta q_k$$
 
 Collision avoidance is modeled by proxying the end effector plus grasped cube with three spheres placed along the tool ($[0,0,0]$, $[0,0,0.02]$, $[0,0,0.03]$ m) and radii of roughly 0.03–0.05 m after inflation. At every step, each sphere must clear the perceived obstacle AABB by at least its radius (hard constraint). Table clearance is handled with slack to avoid infeasibility when the table height estimate is tight, and the down-facing condition on the tool is applied only at the terminal waypoint (soft slack) so the arm can maneuver freely mid-trajectory but end with the gripper oriented downward at the drop pose.
 
-The cost penalizes end-effector position error, joint step magnitude, and terminal position error (with a terminal weight 10× larger). Orientation tracking along the path is disabled—only the terminal facing-down condition is enforced—so the solver prioritizes obstacle clearance and goal convergence. Obstacle geometry comes straight from perception as an AABB in the robot frame, so any change in the obstacle estimate is reflected immediately in the constraint set.
+The cost penalizes end-effector position error, joint step magnitude, and terminal position error (with a terminal weight 10× larger). Orientation tracking along the path is disabled—only the terminal facing-down condition is enforced,so the solver prioritizes obstacle clearance and goal convergence. Obstacle geometry comes straight from perception as an AABB in the robot frame, so any change in the obstacle estimate is reflected immediately in the constraint set.
 
 Execution follows a receding-horizon loop: 
 
