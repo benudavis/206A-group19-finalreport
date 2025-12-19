@@ -30,3 +30,13 @@ The NMPC controller uses a 30-step horizon at $\Delta t = 0.1$ s with per-step j
 Execution follows a short-horizon closed loop: solve NMPC with the latest joint state and obstacle AABB, execute the first three 0.15 s joint steps from that solution via `FollowJointTrajectory`, then replan with the updated state. The loop stops when the goal is within 3 cm or a maximum iteration cap (40 solves) is hit. Early failures were traced to oversized proxy spheres (false collisions) and an imbalanced Q/R that favored smoothness over goal seeking; shrinking the spheres and retuning the weights restored feasibility and consistent convergence around the hard obstacle constraints.
 
 `warehouse_sorting_bringup.launch.py` starts the perception transformers and the planning node with these parameters.
+
+We validated the closed-loop NMPC in MuJoCo before hardware. The controller cleared the obstacle and delivered cubes to their drop zones while respecting the proxy-sphere AABB constraints.
+
+{% include figure image_path="/assets/media/mujoco_pt1.png" width="70%" caption="Start of the MPC solve (cube grasped, obstacle AABB visible)." %}
+{% include figure image_path="/assets/media/mujoco_pt2.png" width="70%" caption="First replans steer around the obstacle while maintaining table clearance." %}
+{% include figure image_path="/assets/media/mujoco_pt3.png" width="70%" caption="Approaching the drop zone; terminal facing-down enforced only at the goal." %}
+{% include figure image_path="/assets/media/mujoco_pt4.png" width="70%" caption="Final placement with obstacle avoided and goal reached." %}
+
+
+
