@@ -48,7 +48,7 @@ author_profile: false
 
 <div class="team-grid">
   <div class="team-member">
-    <img src="{{ '/assets/media/kathy.jpg' | relative_url }}" alt="Kathy Min">
+    <img src="{{ '/assets/media/kathy.jpeg' | relative_url }}" alt="Kathy Min">
     <h3>Kathy Min</h3>
     <p>Kathy is a Mechanical Engineering PhD student in the Berkeley Robotics and Human Engineering Lab. She is interested in mechatronics and controls, particularly pertaining to wearable exoskeleton devices.</p>
     <p>Kathy worked with Ben to implement the perception stack. She also worked with the team on system integration and debugging.</p>
