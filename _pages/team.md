@@ -69,7 +69,7 @@ author_profile: false
   </div>
 
   <div class="team-member">
-    <img src="{{ '/assets/media/parham.jpg' | relative_url }}" alt="Parham Sharafoleslami">
+    <img src="{{ '/assets/media/parham.jpeg' | relative_url }}" alt="Parham Sharafoleslami">
     <h3>Parham Sharafoleslami</h3>
     <p>Parham is an MEng Mechanical Engineering student specializing in Robotics and Autonomous Systems. He is currently working with Dr. Allen Y. Yang on the Autonomous Race Car project. His research interests includes offline MPC and control systems, with applications in robotics and automation.</p>
     <p>Parham worked with Sharaf to implement the planning/control stack. He also worked with the team on system integration and debugging.</p>
