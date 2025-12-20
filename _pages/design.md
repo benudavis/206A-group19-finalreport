@@ -39,7 +39,8 @@ One major drawback of this approach is that we cannot handle objects in contact 
 
 ## Design: Planning and Control
 
-To move the grasped cube around the obstacle, we use a joint-space nonlinear MPC (NMPC) that optimizes a short horizon, executes only the first three steps, and replans. The decision variables are joint positions $q_k$ and bounded joint steps $\Delta q_k$ with simple discrete-time dynamics over a 30-step horizon with $\Delta t = 0.1$ s. Each step is limited to $\pm 0.15$ rad to keep commanded motion smooth and physically feasible, and joint limits are enforced directly.
+To move the grasped cube around the obstacle, we use a joint-space nonlinear MPC (NMPC) that optimizes a short horizon, executes only the first step, and replans. The decision variables are joint positions $q_k$ and bounded joint steps $\Delta q_k$ with simple discrete-time dynamics over a 30-step horizon with $\Delta t = 0.8$ s. Each step is limited to $\pm 0.15$ rad to keep commanded motion smooth and physically feasible, and joint limits are enforced directly.
+
 
 $$q_{k+1} = q_k + \Delta q_k$$
 
@@ -52,7 +53,7 @@ Execution follows a receding-horizon loop:
 
 (1) solve NMPC with the latest joint state and obstacle AABB 
 
-(2) execute the first three 0.15 s joint steps
+(2) execute the first $\sim$0.15 s joint step
 
 (3) replan until the end effector is within a 3 cm goal tolerance or a maximum iteration cap. 
 
