@@ -23,7 +23,7 @@ The `BoxBounds` and `CubeArray` messages are published in the local (camera) fra
 
 ## Planning and Control
 
-Our controls stack lives in the ROS 2 planning package. The main node, `main_mpc_new.py`, subscribes to `JointState`, `LabeledCubeArray` (cube centroids + color), and `BoxBounds` (obstacle AABB) in `base_link`, with TF as a fallback if any message arrives in another frame. It assigns fixed drop locations based on color (e.g red vs. black), queues cubes, and toggles the gripper via a `Trigger` service.
+Our controls stack lives in the ROS 2 planning package. The main node, `main_mpc_new.py`, which subscribes to `JointState`, `LabeledCubeArray` (cube centroids + color), and `BoxBounds` (obstacle AABB) in `base_link`, with TF as a fallback if any message arrives in another frame. It assigns fixed drop locations based on color (e.g red vs. black), queues cubes, and toggles the gripper via a `Trigger` service.
 
 The NMPC controller uses a 30-step horizon at $\Delta t = 0.08$ s with per-step joint limits of $\pm 0.15$ rad. The end effector with grasped cube is approximated by multiple inflated proxy spheres (radii ≈ 0.03–0.05 m) that must clear the perceived obstacle AABB at every step (hard constraint). Table clearance is enforced with slack, and a facing-down condition is enforced only at the terminal waypoint (soft slack). Costs emphasize end-effector position error and terminal accuracy (terminal weight multiplier = 10) with a lighter penalty on joint step magnitude; orientation tracking along the path is disabled.
 
