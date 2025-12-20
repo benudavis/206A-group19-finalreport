@@ -33,10 +33,10 @@ Execution follows a short-horizon closed loop: solve NMPC with the latest joint 
 
 We validated the closed-loop NMPC in MuJoCo before hardware. The controller cleared the obstacle and delivered cubes to their drop zones while respecting the proxy-sphere AABB constraints.
 
-{% include figure image_path="/assets/media/mujoco_pt1.png" width="70%" caption="Start of the MPC solve (cube grasped, obstacle AABB visible)." %}
-{% include figure image_path="/assets/media/mujoco_pt2.png" width="70%" caption="First replans steer around the obstacle while maintaining table clearance." %}
+
+{% include figure image_path="/assets/media/mujoco_pt2.png" width="70%" caption="Start of the MPC solve (cube grasped, obstacle AABB visible)." %}
 {% include figure image_path="/assets/media/mujoco_pt3.png" width="70%" caption="Approaching the drop zone; terminal facing-down enforced only at the goal." %}
-{% include figure image_path="/assets/media/mujoco_pt4.png" width="70%" caption="Final placement with obstacle avoided and goal reached." %}
+
 
 
 
