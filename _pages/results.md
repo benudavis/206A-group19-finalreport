@@ -12,6 +12,6 @@ Below is a video of our Robot Arm in action! Showcasing the fully working MPC an
 
 <p>Sorting demo (on hardware):</p>
 <video width="800" controls preload="metadata">
-  <source src="/assets/media/final_robot_mpc.mp4" type="video/mp4">
+  <source src="/assets/media/final_robot_mpc.mp4 type="video/mp4">
   Your browser does not support the video tag.
 </video>
