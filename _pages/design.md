@@ -39,7 +39,7 @@ One major drawback of this approach is that we cannot handle objects in contact 
 
 ## Design: Planning and Control
 
-To move the grasped cube around the obstacle, we use a joint-space nonlinear MPC (NMPC) that optimizes a short horizon, executes only the first step, and replans. The decision variables are joint positions $q_k$ and bounded joint steps $\Delta q_k$ with simple discrete-time dynamics over a 30-step horizon with $\Delta t = 0.08$ s. Each step is limited to $\pm 0.15$ rad to keep commanded motion smooth and physically feasible, and joint limits are enforced directly.
+To move the grasped cube around the obstacle, we used a joint-space nonlinear MPC (NMPC) that optimizes a short horizon, executes only the first step, and replans. The decision variables are joint positions $q_k$ and bounded joint steps $\Delta q_k$ with simple discrete-time dynamics over a 30-step horizon with $\Delta t = 0.08$ s. Each step is limited to $\pm 0.15$ rad to keep commanded motion smooth and physically feasible, and joint limits are enforced directly.
 
 
 $$q_{k+1} = q_k + \Delta q_k$$
@@ -57,6 +57,6 @@ Execution follows a receding-horizon loop:
 
 (3) replan until the end effector is within a 3 cm goal tolerance or a maximum iteration cap. 
 
-This closed-loop scheme was critical for robustness. Earlier open-loop plans would either violate the inflated obstacle bounds (when proxy radii were too large) or favor smoothness over goal seeking (when Q/R was unbalanced). Smaller proxy spheres and retuned weights, combined with frequent replanning, resolved those failures and kept the arm converging while respecting hard obstacle constraints.
+This closed-loop scheme was critical for robustness. Earlier open-loop plans would either violate the inflated obstacle bounds (when proxy radii were too large) or favor smoothness over goal seeking (when Q/R was unbalanced). Smaller proxy spheres and retuned weights, combined with frequent replanning, resolved those failures and kept the arm converging with respect to the hard obstacle constraints.
 
 Key design trade-offs mirror the perception stack: hard AABB clearance for safety, softened table and terminal-facing constraints for feasibility, terminal-only orientation to reduce unnecessary path constraints, and short-horizon replanning to tolerate state drift and updated obstacle estimates.
